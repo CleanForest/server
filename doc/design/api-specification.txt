@@ -1,0 +1,67 @@
+ROW API SPECIFICATION
+
+FILES
+  /images/litters/{id-i}
+  /images/LITTERS/cleaning/{id-i}
+  /images/users/{id}
+<dfasdfsdfasdf
+LITTERS
+  get: /litters/{id}
+  get: /litters
+    query-fields:
+      location: geography, optional (required if distance is on)
+      distance: int, optional (required if location is on)
+      category: int, optional
+      cleaning: boolean, optional
+  get: /users/{id}/litters
+  post: /litters
+    body-fields:
+      json: Litters
+  delete: /litters/{id}
+
+LITTER VERIFICATIONS
+  get: /litters/{id}/verifications
+    query-fields:
+      pagination: int, required
+  post: /litters/{id}/verifications
+    body-fields:
+      json: Verification
+  delete:  /litters/{id}/verifications/{id}
+
+CLEANING
+  get: /litters/{id}/cleaning
+  post: /litters/{id}/cleaning
+    body-fields:
+      json: Cleaning
+  delete: /litters/{id}/cleaning
+
+CLEANING VERIFICATIONS
+  get: /litters/{id}/cleaning/verifications
+    query-fields:
+      pagination: int, required
+  post: /litters/{id}/cleaning/verifications
+    body-fields:
+      json: Verification
+  delete:  /litters/{id}/cleaning/verifications/{id}
+
+USERS
+  get: /users/{id}
+  get: /users
+    query-fields:
+      checked: optional, boolean
+      isOrganization: optional, boolean
+      nickname: optional, string
+      name: optional, string
+  post: /users
+    body-fields:
+      json: User
+  put: /users/{id}
+    body-fields:
+      json: User
+
+JSON SCHEMAS
+  Litter: id, title, despcription, location, created_date, category, banned, url_images, url_user
+  Cleaning:
+  Verification:
+  CleaningPlanning:
+  User
