@@ -1,67 +1,77 @@
-ROW API SPECIFICATION
+CLEAN-FOREST API SPECIFICATION
 
-FILES
+-- FILES --
   /images/litters/{id-i}
-  /images/LITTERS/cleaning/{id-i}
+  /images/litters/cleaning/{id-i}
   /images/users/{id}
-<dfasdfsdfasdf
-LITTERS
-  get: /litters/{id}
-  get: /litters
+
+-- LITTERS --
+  GET: /litters/{id}
+  GET: /litters
     query-fields:
       location: geography, optional (required if distance is on)
       distance: int, optional (required if location is on)
       category: int, optional
       cleaning: boolean, optional
-  get: /users/{id}/litters
-  post: /litters
+  GET: /users/{id}/litters
+  POST: /litters
     body-fields:
-      json: Litters
-  delete: /litters/{id}
+      json: Litter
+  DELETE: /litters/{id}
 
-LITTER VERIFICATIONS
-  get: /litters/{id}/verifications
+-- LITTER VERIFICATIONS --
+  GET: /litters/{id}/verifications
     query-fields:
       pagination: int, required
-  post: /litters/{id}/verifications
+  POST: /litters/{id}/verifications
     body-fields:
       json: Verification
-  delete:  /litters/{id}/verifications/{id}
+  DELETE:  /litters/{id}/verifications/{id}
 
-CLEANING
-  get: /litters/{id}/cleaning
-  post: /litters/{id}/cleaning
+-- CLEANINGS --
+  GET: /litters/{id}/cleaning
+  POST: /litters/{id}/cleaning
     body-fields:
       json: Cleaning
-  delete: /litters/{id}/cleaning
+  DELETE: /litters/{id}/cleaning
 
-CLEANING VERIFICATIONS
-  get: /litters/{id}/cleaning/verifications
+-- CLEANING VERIFICATIONS --
+  GET: /litters/{id}/cleaning/verifications
     query-fields:
       pagination: int, required
-  post: /litters/{id}/cleaning/verifications
+  POST: /litters/{id}/cleaning/verifications
     body-fields:
       json: Verification
-  delete:  /litters/{id}/cleaning/verifications/{id}
+  DELETE:  /litters/{id}/cleaning/verifications/{id}
 
-USERS
-  get: /users/{id}
-  get: /users
+-- CLEANING PLANNINGS --
+  GET: /users/{id}/cleaningplannings
+  GET: /users/{id}/cleaningplannings/{id}
+  POST: /users/{id}/cleaningplannings
+    body-fields:
+      json: CleaningPlanning
+  PUT: /users/{id}/cleaningplannings/{id}
+      json: CleaningPlanning
+  DELETE: /users/{id}/cleaningplannings/{id}
+
+-- USERS --
+  GET: /users/{id}
+  GET: /users
     query-fields:
       checked: optional, boolean
-      isOrganization: optional, boolean
+            isOrganization: optional, boolean
       nickname: optional, string
       name: optional, string
-  post: /users
+  POST: /users
     body-fields:
       json: User
-  put: /users/{id}
+  PUT: /users/{id}
     body-fields:
       json: User
 
-JSON SCHEMAS
+-- JSON SCHEMAS --
   Litter: id, title, despcription, location, created_date, category, banned, url_images, url_user
-  Cleaning:
-  Verification:
-  CleaningPlanning:
-  User
+  Cleaning: id, date, comment, images
+  Verification: id, date, isTrue, comment
+  CleaningPlanning: id, date, isTrue, comment, list_litters
+  User: id, nickname, name, email, description, checked, isOrganization
